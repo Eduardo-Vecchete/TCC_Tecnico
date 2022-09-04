@@ -100,7 +100,7 @@ void loop()
   Serial.print(F("°C "));
   
   //Conntrole do Peltier
-  temperatura();
+
   if(tempC > 25.0) digitalWrite(RELE_PELTIER , HIGH);
   else digitalWrite(RELE_PELTIER , LOW);
 }
