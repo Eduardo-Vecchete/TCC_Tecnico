@@ -25,7 +25,6 @@ LiquidCrystal lcd(LCD_PIN_RS,LCD_PIN_E,LCD_PIN_D4,LCD_PIN_D5,LCD_PIN_D6,LCD_PIN_
 // ========================================================================================================
 // --- Variaveis Globais ---
 
-void  temperatura();  //função para medida e cálculo de temperatura
 float humi;           //armazena humidade
 float tempC;          //armazena temperatura em Graus Celsius
 
@@ -105,18 +104,6 @@ void loop()
   if(tempC > 25.0) digitalWrite(RELE_PELTIER , HIGH);
   else digitalWrite(RELE_PELTIER , LOW);
 }
-void temperatura()
-{  
-    tempC = analogRead(DHTPIN);
-    tempC = (tempC*5.0)/1024.0;
-    tempC = tempC*100.0;
 
-    //Monitor Serial Print
-    Serial.print("Temperatura = ");
-    Serial.print(tempC);
-    Serial.print(" C");
-  
-}
-//end temperatura
 
  //end loop
