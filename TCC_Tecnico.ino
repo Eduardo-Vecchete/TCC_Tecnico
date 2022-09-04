@@ -8,7 +8,7 @@
 // ========================================================================================================
 // --- Mapeamento de Hardware ---
 #define RELE_PELTIER   13    //controle do relé de acionamento da pastilha Peltier
-#define DHTPIN         1     // Pino digital sensor DHT
+#define DHTPIN         A0     // Pino digital sensor DHT
 #define DHTTYPE DHT11        // DHT 11
 #define LCD_PIN_RS 12
 #define LCD_PIN_E  11
@@ -25,8 +25,8 @@ LiquidCrystal lcd(LCD_PIN_RS,LCD_PIN_E,LCD_PIN_D4,LCD_PIN_D5,LCD_PIN_D6,LCD_PIN_
 // ========================================================================================================
 // --- Variaveis Globais ---
 
- float humi;        //armazena humidade
- float tempC;   //armazena temperatura em Graus Celsius
+float humi;        //armazena humidade
+float tempC;   //armazena temperatura em Graus Celsius
 
 // ========================================================================================================
 // --- Configurações Iniciais ---
@@ -41,13 +41,11 @@ void setup()
 
   delay(1000);
   lcd.setCursor(0,0);
-  lcd.println("Welcome to Microdigisoft");
+  lcd.println("TCC");
 
   delay(1000);
   lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.println("DHT11 Humidade e temperatura");
-  
+ 
   pinMode(RELE_PELTIER , OUTPUT); //saída para controle da pastilha
   digitalWrite(RELE_PELTIER , LOW); //desliga relé de controle da pastilha
   pinMode(DHTPIN,     INPUT); //entrada para sensor de temperatura e umidade
@@ -61,24 +59,20 @@ void setup()
 
 void loop()
 {
-
    // Aguarde alguns segundos entre as medições.
-
-    delay(2000);
+  delay(2000);
 
   // A leitura da temperatura ou umidade leva cerca de 250 milissegundos!
   // O sensor pode ter um atraso de até 2 segundos para a leitura
-  
-  humi = dht.readHumidity();
-  
+  humi = dht.readHumidity(); 
   // Temperature em Celsius (default)
   tempC  = dht.readTemperature();
   
   // Verifique se alguma leitura falhou e tenta novamente.
-  //if (isnan(humi) || isnan(tempC)) {
-  //  Serial.println(F("Falha de leitura do sensor DHT!"));
-    //return;
-  //}
+  if (isnan(humi) || isnan(tempC)) {
+    Serial.println(F("Falha de leitura do sensor DHT!"));
+    return;
+  }
 
   //Display
   lcd.setCursor(0, 0);
@@ -98,16 +92,10 @@ void loop()
   lcd.print(F("C"));
  
   //Conntrole do Peltier
-
-   if(tempC > 25.0) digitalWrite(RELE_PELTIER , HIGH);
-   else digitalWrite(RELE_PELTIER , LOW);
-   
-   //Função Do peltier
-   
-   // Monitor display
-   // Compute heat index in Celsius (isFahreheit = false)
-  float hic = dht.computeHeatIndex(tempC, humi, false);
-
+  if(tempC > 25.0) digitalWrite(RELE_PELTIER , HIGH);
+  else digitalWrite(RELE_PELTIER , LOW);
+    
+  // Monitor display
   Serial.print(F("Umidade: "));
   Serial.print(humi);
   Serial.print(F("%  Temperatura: "));
