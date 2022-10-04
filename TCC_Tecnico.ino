@@ -3,7 +3,7 @@
 // --- Includes ---
 #include "DHT.h"
 #include <Wire.h>
-#include <LiquidCrystal.h>
+#include <LiquidCrystal_I2C.h>
 #include <TimerOne.h>
 
 // ========================================================================================================
@@ -12,12 +12,6 @@
 #define RELE_VALVE     10    //controle do relé de acionamento da valvula
 #define DHT_PIN        A0    // Pino sensor DHT
 #define HIGRO_PIN      A1    // Pino sensor de umidade do solo
-#define LCD_PIN_RS     12
-#define LCD_PIN_E      11
-#define LCD_PIN_D4     5
-#define LCD_PIN_D5     4
-#define LCD_PIN_D6     3
-#define LCD_PIN_D7     2
 
 #define DHT_TYPE       DHT11 // Tipo de DHT
 
@@ -27,7 +21,7 @@
 #define LIMITE_SUPERIOR_SOLO   95 //Maxima umidade do solo para parar de regar o solo, 95% de umidade.
 
 DHT dht(DHT_PIN, DHT_TYPE);
-LiquidCrystal lcd(LCD_PIN_RS,LCD_PIN_E,LCD_PIN_D4,LCD_PIN_D5,LCD_PIN_D6,LCD_PIN_D7);
+LiquidCrystal_I2C lcd(0x27, 16, 2);  //Seta o endereco do LCD para 0x3F para um LCD 16x2
 
 // ========================================================================================================
 
@@ -64,8 +58,8 @@ void setup()
   Serial.println(F("Inicio do monitor do TCC")); 
 
   //Inicializa tudo
-  dht.begin();
-  lcd.begin(16,2);
+  lcd.init();
+  lcd.backlight();
   lcd.setCursor(0,0);
   lcd.println("TCC");
   delay(1000);
