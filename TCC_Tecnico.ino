@@ -58,6 +58,7 @@ void setup()
   Serial.println(F("Inicio do monitor do TCC")); 
 
   //Inicializa tudo
+  dht.begin();
   lcd.init();
   lcd.backlight();
   lcd.setCursor(0,0);
