@@ -49,7 +49,10 @@
                 "C:\\Program Files (x86)\\Arduino\\libraries\\WiFi\\src",
                 "D:\\Users\\lucas\\OneDrive\\Documentos\\Arduino\\libraries\\DHT_sensor_library",
                 "D:\\Users\\lucas\\OneDrive\\Documentos\\Arduino\\libraries\\TimerOne",
-				"D:\\Users\\lucas\\OneDrive\\Documentos\\Arduino\\libraries\\LiquidCrystal_I2C"
+				"D:\\Users\\lucas\\OneDrive\\Documentos\\Arduino\\libraries\\LiquidCrystal_I2C",
+                "C:\\Users\\inesa\\Documents\\Arduino\\libraries\\DHT_sensor_library",
+                "C:\\Users\\inesa\\Documents\\Arduino\\libraries\\TimerOne",
+				"C:\\Users\\inesa\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C"
             ],
             "intelliSenseMode": "msvc-x64",
             "compilerPath": "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\bin\\avr-gcc.exe",
